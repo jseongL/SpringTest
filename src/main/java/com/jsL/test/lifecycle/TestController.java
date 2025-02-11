@@ -1,5 +1,8 @@
 package com.jsL.test.lifecycle;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,15 +20,36 @@ public class TestController {
 				+ "<h3>해당 프로젝트를 통해서 문제 풀이를 진행합니다</h3>";
 	}
 	
-	@ResponseBody
+	@ResponseBody //자동으로 해줌
 	@RequestMapping("/2")
-	public ResponseEntity<Score> entityResponse() {
-		Score score = new Score(80, 95, 85);
+	public Map<String, Integer> entityResponse() {
 		
-		ResponseEntity<Score> entity = new ResponseEntity<Score>(score, HttpStatus.INTERNAL_SERVER_ERROR);
+		Map<String, Integer> scoreMap = new HashMap<>();
+		scoreMap.put("국어", 95);
+		scoreMap.put("수학", 80);
+		scoreMap.put("영어", 85);
 		
-		return entity;
+		return scoreMap;
+		
+		
+//		Score score = new Score(80, 95, 85);
+//		
+//		ResponseEntity<Score> entity = new ResponseEntity<Score>(score, HttpStatus.INTERNAL_SERVER_ERROR);
+//		
+//		return entity;
 	}
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
