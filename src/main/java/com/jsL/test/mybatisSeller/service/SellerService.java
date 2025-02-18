@@ -12,10 +12,27 @@ public class SellerService {
 	@Autowired
 	private SellerRepository sellerRepository;
 	
-	public Seller selectGetLastUser() {
-		Seller seller = sellerRepository.selectLastUser();
+	public int addSeller(
+				String nickname
+				,String profileImage
+				,double temperature
+			) {
+		int count = sellerRepository.insertSeller(nickname, profileImage, temperature);
 		
+		return count;
+	}
+	
+	public Seller getLastSeller() {
+		Seller seller = sellerRepository.selectLastSeller();
 		return seller;
 	}
+	
+	public Seller getSearchSeller(int id) {
+		Seller seller = sellerRepository.selectSearchSeller(id);
+		return seller;
+	}
+	
+	
+	
 
 }
