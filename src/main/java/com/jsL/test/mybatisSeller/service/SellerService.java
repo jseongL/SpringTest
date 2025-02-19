@@ -32,7 +32,10 @@ public class SellerService {
 		return seller;
 	}
 	
-	
+	public Seller getSeller(int id) {
+		Seller seller = sellerRepository.selectSeller(id);
+		return seller;
+	}
 	
 
 }

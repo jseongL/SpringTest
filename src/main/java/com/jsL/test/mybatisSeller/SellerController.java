@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jsL.test.mybatisSeller.domain.Seller;
 import com.jsL.test.mybatisSeller.service.SellerService;
@@ -42,9 +41,17 @@ public class SellerController {
 	
 	
 	//2번
-	@GetMapping("/info")
-	public String sellerInfo(Model model) {
-		Seller seller= sellerService.getLastSeller();
+	@GetMapping("/info")   		//파라메터가 비필수 항목이 되도록 설정          //널이여도 저장되도록
+	public String sellerInfo(@RequestParam(value="id", required=false)Integer id,
+			Model model) {
+		
+		Seller seller = null;
+		if(id == null) {
+			seller= sellerService.getLastSeller();	
+		}
+		else {
+			seller = sellerService.getSeller(id);
+		}
 		
 		model.addAttribute("seller", seller);//키 value형태로 저장
 		

@@ -21,6 +21,22 @@
  	
  	</insert>
  	
+ 	<select id="selectSeller"
+ 	parameterType="int"
+ 	 resultType="com.jsL.test.mybatisSeller.domain.Seller">
+ 		SELECT
+ 			`profileImage`
+ 			,`nickname`
+ 			,`temperature`
+ 		FROM
+ 			`seller`
+ 		WHERE
+ 			`id` = #{id}
+ 		LIMIT 1
+ 	</select>
+ 	
+ 	
+ 	
  	<select id="selectLastSeller"
  	 resultType="com.jsL.test.mybatisSeller.domain.Seller">
  		SELECT
@@ -32,20 +48,6 @@
  		ORDER BY 
  			`id` DESC
  		LIMIT 1
- 	</select>
- 	
- 	
- 	
- 	<select id="selectSearchSeller"
- 	 resultType="com.jsL.test.mybatisSeller.domain.Seller">
- 		SELECT
- 			`profileImage`
- 			,`nickname`
- 			,`temperature`
- 		FROM
- 			`seller`
- 		WHERE
- 			`id` = #{id}
  	</select>
  	
  	
