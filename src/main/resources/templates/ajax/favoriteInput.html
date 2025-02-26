@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
 </head>
 <body>
 
@@ -12,7 +14,8 @@
 		<label>제목</label>
 		<input class="col-12" type="text" id="nameInput">
 		<label>주소</label>
-		<input class="col-12" type="text" id="urlInput">
+		<input class="col-12 " type="text" id="urlInput">
+		<button class="dubBtn bg-info text-white border-0" id="isDuplicate">중복확인</button>
 		<button class="btn col-12 bg-success text-white mt-3" id="addBtn">추가</button>
 	</div>
 	
@@ -29,12 +32,49 @@
   
   
  	<script>
+ 	
+ 	$(function(){
+ 			let dup_flag = false;
+ 		
+			$("#isDuplicate").on("click", function(){
+				let url = $("#urlInput").val();
+				
+				if(url == ""){
+					alert("url을 입력하세요")	
+				}
+				$.ajax({
+					type:`get`
+					,url:"/ajax/favorite/isDuplicate"
+					,data:{"url":url}
+					,success:function(response){
+						if(response.isDuplicate){
+							alert("중복");
+							
+						}
+						else{
+							alert("url사용가능");
+						}
+						
+					}
+					,erroe:function(){
+						alert("중복확인 에러");
+					}
+					
+				})
+				
+				
+				
+			})
+		})
+ 	
+ 	
  		$(function(){
  			$("#addBtn").on("click", function(){
  				let name = $("#nameInput").val();
  				let url = $("#urlInput").val();
  				
  				//유효성 검사 (Validation)
+ 				
  				if(name == ""){
  					alert("제목을 입력하세요");
  					return ;
@@ -43,20 +83,24 @@
  					alert("url을 입력하세요");
  					return ;
  				}
+ 				if(!url.startsWith("http://") && !url.startsWith("https://")){
+ 					alert("사이트 주소 규격이 맞지 않습니다.");
+ 					return ;
+ 				}
  				
  				
  				$.ajax({
- 						type:"get"
+ 						type:"post"
  						,url:"/ajax/favorite/create"
  						,data:{"name":name,"url":url}
  						,success:function(response){
  							//성공 {"result":"success"}
  							//실패 {"result":"fail"}
  							if(response.result == "success"){
- 								alert("성공");
+ 								window.location.href="http://localhost:8080/ajax/favorite/info";
  							}
  							else{
- 								alert("사용자 추가 실패");
+ 								alert("즐겨찾기 추가");
  							}
  							
  						}
@@ -69,6 +113,13 @@
  			});
  			
  		})
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
  	</script>
 	
 	

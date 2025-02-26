@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.jsL.test.ajax.mybatisFavorite.repository.FavoriteRepository">
- 	<insert id="insertFavorite" parameterType="com.jsL.test.ajax.mybatisFavorite.domain.Favorite">
+ 	<insert id="insertFavorite" parameterType="map">
  		INSERT INTO `favorite`
  			(	
  			`name`
@@ -15,4 +15,29 @@
  			,#{url}
  		)
  	</insert>
+ 	
+ 	<select id="selectFavorite" resultType="com.jsL.test.ajax.mybatisFavorite.domain.Favorite">
+ 		SELECT
+ 			`name`
+ 			,`url`
+ 		FROM
+ 			`favorite`
+ 	</select>
+ 	
+ 	<select id="selectCountByUrl" parameterType="String" resultType="int">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`favorite`
+ 		WHERE
+ 			`url` = #{url}
+ 	</select>
+ 	
+ 	<delete id="deleteFavorite">
+ 		DELETE FROM `favorite`
+ 		WHERE `id` = #{id}
+ 	</delete>
+ 	
+ 	
+ 	
  </mapper>

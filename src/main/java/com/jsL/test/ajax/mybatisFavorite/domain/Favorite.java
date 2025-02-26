@@ -1,8 +1,15 @@
 package com.jsL.test.ajax.mybatisFavorite.domain;
 
 public class Favorite {
+	private int id;
 	private String name;
 	private String url;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -15,6 +22,7 @@ public class Favorite {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
 	
 
 }

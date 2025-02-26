@@ -14,9 +14,33 @@ public class FavoriteService {
 	@Autowired
 	private FavoriteRepository favoriteRepository;
 	
-	public int addFavorite(String name, String url) {
-		int count = favoriteRepository.insertFavorite(name, url);
+	public int addFavorite(Favorite favorite) {
+		int count = favoriteRepository.insertFavorite(favorite);
 		return count;
 	}
+	
+	
+	public List<Favorite> getselectFavorite(){
+		List<Favorite> favorite = favoriteRepository.selectFavorite();
+		return favorite;
+ 	}
+	
+	public boolean isDuplicateUrl(String url) {
+		int count = favoriteRepository.selectCountByUrl(url);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isDeleteFavorite(int id) {
+		int count = favoriteRepository.deleteFavorite(id);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 
 }
