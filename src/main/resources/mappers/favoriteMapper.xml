@@ -18,7 +18,8 @@
  	
  	<select id="selectFavorite" resultType="com.jsL.test.ajax.mybatisFavorite.domain.Favorite">
  		SELECT
- 			`name`
+ 			`id`
+ 			,`name`
  			,`url`
  		FROM
  			`favorite`
@@ -33,7 +34,7 @@
  			`url` = #{url}
  	</select>
  	
- 	<delete id="deleteFavorite">
+ 	<delete id="deleteFavorite" parameterType="int">
  		DELETE FROM `favorite`
  		WHERE `id` = #{id}
  	</delete>

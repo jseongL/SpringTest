@@ -16,6 +16,11 @@
 		<label>주소</label>
 		<input class="col-12 " type="text" id="urlInput">
 		<button class="dubBtn bg-info text-white border-0" id="isDuplicate">중복확인</button>
+		<div>
+			<div id="duplicateText" class="small text-danger d-none">중복된 아이디</div>
+			<div id="availableText" class="small text-success d-none">사용가능 아이디</div>
+		</div>
+		
 		<button class="btn col-12 bg-success text-white mt-3" id="addBtn">추가</button>
 	</div>
 	
@@ -48,11 +53,12 @@
 					,data:{"url":url}
 					,success:function(response){
 						if(response.isDuplicate){
-							alert("중복");
-							
+							$("#duplicateText").removeClass("d-none");
+							$("#availableText").addClass("d-none");
 						}
 						else{
-							alert("url사용가능");
+							$("#availableText").removeClass("d-none");
+							$("#dupliacteText").addClass("d-none");
 						}
 						
 					}

@@ -27,10 +27,12 @@ public class FavoriteService {
 	
 	public boolean isDuplicateUrl(String url) {
 		int count = favoriteRepository.selectCountByUrl(url);
-		if(count > 0) {
-			return true;
-		}
-		return false;
+//		if(count > 0) {
+//			return true;
+//		}
+//		return false;
+		
+		return count != 0;
 	}
 	
 	public boolean isDeleteFavorite(int id) {

@@ -23,7 +23,9 @@
 			
 			
 			<tbody>
-				<tr th:each="favorite,status:${favoriteList}">
+				<tr th:each="favorite,status:${favoriteList}"
+				th:data-id="${favorite.id}"
+				>
 					<td th:text="${status.count}">1</td>
 					<td th:text="${favorite.name}">마론당</td>
 					<td th:text="${favorite.url}"></td>
@@ -42,24 +44,23 @@
 	<script>
 		$(function(){
 			$(".deleteBtn").on("click", function(){
-				alert("삭제버튼");
 				
-				
+				let id = $(this).closest("tr").data("id");
 				$.ajax({
-					type:`get`
+					type:`DELETE`
 					,url:"/ajax/favorite/deleteFavorite"
 					,data:{"id":id}///////////////////////////////
 					,success:function(response){
 						if(response.isDelete){//////////////
 							alert("삭제완료");
-							window.location.href="http://localhost:8080/ajax/favorite/info";
+							location.reload();
 						}
 						else{
 							alert("삭제불가");
 						}
 						
 					}
-					,erroe:function(){
+					,error:function(){
 						alert("삭제 에러");
 					}
 					

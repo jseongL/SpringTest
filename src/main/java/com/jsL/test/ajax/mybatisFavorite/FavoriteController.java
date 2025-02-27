@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,36 +84,36 @@ public class FavoriteController {
 			){
 		boolean isDuplicate = favoriteService.isDuplicateUrl(url);
 		
-		Map<String, Boolean> resultType = new HashMap<>();
+		Map<String, Boolean> resultMap = new HashMap<>();
 		
 		if(isDuplicate) {
-			resultType.put("isDuplicate", true);
+			resultMap.put("isDuplicate", true);
 		}
 		else {
-			resultType.put("isDuplicate", false);
+			resultMap.put("isDuplicate", false);
 		}
 		
-		return resultType;
+		return resultMap;
 		
 	}
 	
 	
 	@ResponseBody
-	@GetMapping("/deleteFavorite")
+	@DeleteMapping("/deleteFavorite")
 	public Map<String, Boolean> deleteFavorite(@RequestParam("id")int id){
 		
 		boolean isDelete = favoriteService.isDeleteFavorite(id);
 		
-		Map<String, Boolean> resultType = new HashMap<>();
+		Map<String, Boolean> resultMap = new HashMap<>();
 		
 		if(isDelete) {
-			resultType.put("isDelete", true);
+			resultMap.put("isDelete", true);
 		}
 		else {
-			resultType.put("isDelete", false);
+			resultMap.put("isDelete", false);
 		}
 		
-		return resultType;
+		return resultMap;
 		
 	}
 	
