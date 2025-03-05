@@ -1,4 +1,4 @@
-package com.jsL.test.jpa.mybatisCompany.domain;
+package com.jsL.test.jpa.mybatisRecruit.domain;
 
 import java.time.LocalDateTime;
 
@@ -21,20 +21,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Table(name="`company`")
+@Table(name="`recruit`")
 @Entity
-
-
-public class Company {
+public class Recruit {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String name;
-	private String business;
-	private String scale;
-	private int headcount;
-	@Column(name="createdAt")//대문자 있으면 카멜 어노테이션 써야함
+	private int companyId;
+	@Column(name="position")
+	private String position;
+	private String responsibilities;
+	private String qualification;
+	private String type;
+	private String region;
+	private int salary;
+	private String deadline;
+	
+	@Column(name="createdAt")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	@Column(name="updatedAt")

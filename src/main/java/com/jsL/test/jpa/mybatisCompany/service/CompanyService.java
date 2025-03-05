@@ -46,7 +46,7 @@ public class CompanyService {
 		
 		Company company = optionalCompany.orElse(null);
 		
-		company = company.toBuilder().scale(scale).build();
+		company = company.toBuilder().scale(scale).build();//수
 		company = company.toBuilder().headcount(headcount).build();
 		
 		Company result = companyRepository.save(company);
